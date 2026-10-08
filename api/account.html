@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>My Account | Cryoxa</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 30px 20px;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      color: #ff3030;
+      font-weight: bold;
+      font-size: 22px;
+      text-decoration: none;
+    }
+
+    .logout {
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      background: #ff3030;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .card {
+      background: #121212;
+      border: 1px solid #302020;
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ff3030;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .username {
+      color: #ff5555;
+      margin-top: 8px;
+    }
+
+    .row {
+      border-top: 1px solid #292929;
+      padding: 20px 0;
+      margin-top: 20px;
+    }
+
+    .label {
+      color: #777;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .value {
+      margin-top: 7px;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+
+    .loading {
+      color: #aaa;
+    }
+
+    .error {
+      color: #ff5555;
+    }
+
+    a {
+      color: #ff5555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="topbar">
+
+      <a class="logo" href="/">
+        CRYOXA
+      </a>
+
+      <button id="logout" class="logout">
+        Log Out
+      </button>
+
+    </div>
+
+    <main class="card">
+
+      <div id="avatar" class="avatar">
+        ?
+      </div>
+
+      <h1>My Account</h1>
+
+      <div id="username" class="username loading">
+        Loading...
+      </div>
+
+      <div class="row">
+
+        <div class="label">
+          Email
+        </div>
+
+        <div id="email" class="value loading">
+          Loading...
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="label">
+          Bio
+        </div>
+
+        <div id="bio" class="value loading">
+          Loading...
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="label">
+          Member Since
+        </div>
+
+        <div id="created" class="value loading">
+          Loading...
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <a href="/">
+          ← Back to Cryoxa
+        </a>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://cdqspsskeksmmvedinxe.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_rj9hCyLNlt6ik8ts07dlLA_BcV5MsJ0";
+
+    const client = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+    async function loadAccount() {
+
+      const {
+        data: {
+          user
+        },
+        error: userError
+      } = await client.auth.getUser();
+
+      if (userError || !user) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      document.getElementById("email").textContent =
+        user.email || "No email";
+
+      const {
+        data: profile,
+        error: profileError
+      } = await client
+        .from("profiles")
+        .select("username, bio, created_at")
+        .eq("id", user.id)
+        .single();
+
+      if (profileError) {
+
+        console.error(profileError);
+
+        document.getElementById("username").textContent =
+          "Unable to load profile.";
+
+        document.getElementById("username")
+          .classList.add("error");
+
+        return;
+      }
+
+      document.getElementById("username").textContent =
+        "@" + profile.username;
+
+      document.getElementById("bio").textContent =
+        profile.bio || "No bio yet.";
+
+      document.getElementById("created").textContent =
+        new Date(profile.created_at).toLocaleDateString(
+          undefined,
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+      document.getElementById("avatar").textContent =
+        profile.username.charAt(0).toUpperCase();
+    }
+
+    document
+      .getElementById("logout")
+      .addEventListener("click", async () => {
+
+        const {
+          error
+        } = await client.auth.signOut();
+
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        window.location.href = "/";
+      });
+
+    loadAccount();
+
+  </script>
+
+</body>
+</html>
