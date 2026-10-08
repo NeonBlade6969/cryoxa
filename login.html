@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log In | Cryoxa</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      padding: 20px; background: #080808; color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    .card {
+      width: 100%; max-width: 420px; padding: 30px;
+      background: #121212; border: 1px solid #302020; border-radius: 16px;
+    }
+    h1 span { color: #ff3030; }
+    p { color: #aaa; line-height: 1.5; }
+    label { display: block; margin: 16px 0 7px; }
+    input {
+      width: 100%; padding: 13px; border-radius: 8px;
+      border: 1px solid #383838; background: #080808;
+      color: white; font-size: 16px;
+    }
+    button {
+      width: 100%; margin-top: 22px; padding: 14px;
+      border: 0; border-radius: 8px; background: #ff3030;
+      color: white; font-weight: bold; cursor: pointer;
+    }
+    a { color: #ff5555; }
+    #message { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Welcome back to <span>CRYOXA</span></h1>
+    <p>Log in to access your account and contacts.</p>
+
+```
+<form id="login-form">
+  <label for="email">Email</label>
+  <input id="email" type="email" required autocomplete="email"
+    placeholder="you@example.com">
+
+  <label for="password">Password</label>
+  <input id="password" type="password" required
+    autocomplete="current-password" placeholder="Your password">
+
+  <button id="submit" type="submit">Log In</button>
+</form>
+
+<p id="message" role="status"></p>
+<p>New to Cryoxa? <a href="/signup.html">Create an account</a></p>
+<p><a href="/">← Back to Cryoxa</a></p>
+```
+
+  </main>
+
+  <script>
+    // Use the SAME values as signup.html.
+    const SUPABASE_URL = "https://cdqspsskeksmmvedinxe.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_rj9hCyLNlt6ik8ts07dlLA_BcV5MsJ0";
+
+    const client = window.supabase.createClient(
+      SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const form = document.getElementById("login-form");
+    const message = document.getElementById("message");
+    const submit = document.getElementById("submit");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      submit.disabled = true;
+      message.textContent = "Logging in...";
+
+      try {
+        const { error } = await client.auth.signInWithPassword({
+          email: document.getElementById("email").value.trim(),
+          password: document.getElementById("password").value
+        });
+
+        if (error) throw error;
+
+        window.location.href = "/";
+      } catch (error) {
+        message.textContent =
+          error.message || "Login failed. Please check your details.";
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
