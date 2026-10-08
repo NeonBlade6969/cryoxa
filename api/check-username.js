@@ -1,6 +1,9 @@
 export default async function handler(req, res) {
   if (req.method !== "GET") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({
+      available: false,
+      error: "Method not allowed"
+    });
   }
 
   const username = String(req.query.username || "")
@@ -15,26 +18,6 @@ export default async function handler(req, res) {
     });
   }
 
-  const reserved = [
-    "admin",
-    "administrator",
-    "support",
-    "login",
-    "signup",
-    "register",
-    "api",
-    "root",
-    "moderator",
-    "official",
-    "cryoxa",
-    "settings",
-    "contacts"
-  ];
-
-  if (reserved.includes(username)) {
-    return res.status(200).json({ available: false });
-  }
-
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -46,24 +29,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(
-      `${url}/rest/v1/profiles?username=eq.${encodeURIComponent(
-        username
-      )}&select=username`,
+    // Check reserved usernames
+    const reservedResponse = await fetch(
+      `${url}/rest/v1/reserved_usernames?username=eq.${encodeURIComponent(username)}&select=username`,
       {
-        method: "GET",
         headers: {
           apikey: key,
-          Authorization: `Bearer ${key}`,
-          "Content-Type": "application/json"
+          Authorization: `Bearer ${key}`
         }
       }
     );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-
-      console.error("Supabase error:", response.status, errorText);
+    if (!reservedResponse.ok) {
+      console.error(
+        "Reserved username check failed:",
+        await reservedResponse.text()
+      );
 
       return res.status(502).json({
         available: false,
@@ -71,11 +52,43 @@ export default async function handler(req, res) {
       });
     }
 
-    const profiles = await response.json();
+    const reserved = await reservedResponse.json();
+
+    if (reserved.length > 0) {
+      return res.status(200).json({
+        available: false
+      });
+    }
+
+    // Check existing profiles
+    const profileResponse = await fetch(
+      `${url}/rest/v1/profiles?username=eq.${encodeURIComponent(username)}&select=username`,
+      {
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`
+        }
+      }
+    );
+
+    if (!profileResponse.ok) {
+      console.error(
+        "Profile username check failed:",
+        await profileResponse.text()
+      );
+
+      return res.status(502).json({
+        available: false,
+        error: "Could not check username."
+      });
+    }
+
+    const profiles = await profileResponse.json();
 
     return res.status(200).json({
       available: profiles.length === 0
     });
+
   } catch (error) {
     console.error("Username check error:", error);
 
