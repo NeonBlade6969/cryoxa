@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryoxa - Next-Gen Dark Digital Realm</title>
+    <title>Cryoxa - Roblox Game Development Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #050203;
-            --bg-card: rgba(18, 5, 8, 0.65);
+            --bg-card: rgba(18, 5, 8, 0.7);
             --red-glow: #ff1e43;
             --red-deep: #8b0000;
-            --red-crimson: #dc2626;
         }
 
         body {
@@ -28,11 +27,11 @@
         }
 
         .glow-text-red {
-            text-shadow: 0 0 10px rgba(255, 30, 67, 0.7), 0 0 25px rgba(255, 30, 67, 0.4), 0 0 40px rgba(220, 38, 38, 0.2);
+            text-shadow: 0 0 12px rgba(255, 30, 67, 0.8), 0 0 28px rgba(255, 30, 67, 0.4);
         }
 
         .glow-box-red {
-            box-shadow: 0 0 25px rgba(255, 30, 67, 0.25), inset 0 0 15px rgba(255, 30, 67, 0.15);
+            box-shadow: 0 0 25px rgba(255, 30, 67, 0.25), inset 0 0 15px rgba(255, 30, 67, 0.12);
         }
 
         .glow-box-red-lg {
@@ -46,7 +45,7 @@
         }
 
         .glow-btn:hover {
-            box-shadow: 0 0 35px rgba(255, 30, 67, 0.8), 0 0 10px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 35px rgba(255, 30, 67, 0.85);
             transform: translateY(-2px) scale(1.02);
         }
 
@@ -65,14 +64,14 @@
         }
 
         .nav-glass {
-            background: rgba(8, 2, 4, 0.8);
+            background: rgba(8, 2, 4, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 30, 67, 0.2);
         }
 
         @keyframes pulseGlow {
             0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.08); }
+            50% { opacity: 0.85; transform: scale(1.08); }
         }
 
         .animate-pulse-glow {
@@ -81,15 +80,15 @@
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
         }
 
         .animate-float {
-            animation: float 6s ease-in-out infinite;
+            animation: float 5s ease-in-out infinite;
         }
 
         .red-gradient-text {
-            background: linear-gradient(135deg, #ffffff 10%, #ff4d6d 50%, #ff1e43 100%);
+            background: linear-gradient(135deg, #ffffff 20%, #ff4d6d 60%, #ff1e43 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -134,19 +133,20 @@
                     <div class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-red-600/30 to-black p-1 border border-red-500/40 group-hover:border-red-500 transition-all duration-300">
                         <img src="../CryoxaLogo.png" alt="Cryoxa Logo" class="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,30,67,0.8)]" onerror="this.src='CryoxaLogo.png'; this.onerror=null;">
                     </div>
-                    <span class="font-orbitron text-2xl font-black tracking-wider text-white glow-text-red">CRYOXA</span>
+                    <div class="flex flex-col">
+                        <span class="font-orbitron text-xl font-black tracking-wider text-white glow-text-red">CRYOXA</span>
+                        <span class="text-[10px] text-red-400 font-semibold tracking-widest uppercase -mt-1">ROBLOX STUDIO</span>
+                    </div>
                 </a>
 
                 <nav class="hidden md:flex items-center gap-8">
-                    <a href="#features" class="text-sm font-semibold text-gray-300 hover:text-red-400 transition-colors">Features</a>
-                    <a href="#stats" class="text-sm font-semibold text-gray-300 hover:text-red-400 transition-colors">Ecosystem</a>
-                    <a href="#node" class="text-sm font-semibold text-gray-300 hover:text-red-400 transition-colors">Nodes</a>
                     <a href="#about" class="text-sm font-semibold text-gray-300 hover:text-red-400 transition-colors">About</a>
+                    <a href="#games" class="text-sm font-semibold text-gray-300 hover:text-red-400 transition-colors">Games</a>
+                    <a href="#contact" class="text-sm font-semibold text-gray-300 hover:text-red-400 transition-colors">Contact</a>
                 </nav>
 
                 <div class="hidden md:flex items-center gap-4">
-                    <button onclick="toggleModal('login-modal')" class="px-5 py-2.5 rounded-xl border border-red-600/40 text-sm font-semibold text-red-200 hover:bg-red-950/40 hover:border-red-500 transition-all">Portal Access</button>
-                    <a href="#cta" class="glow-btn px-6 py-2.5 rounded-xl text-sm font-bold text-white tracking-wide uppercase">Launch App</a>
+                    <a href="#contact" class="glow-btn px-6 py-2.5 rounded-xl text-sm font-bold text-white tracking-wide uppercase">Get In Touch</a>
                 </div>
 
                 <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2">
@@ -156,269 +156,230 @@
 
             <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 border-t border-red-900/30 bg-black/95 backdrop-blur-xl">
                 <div class="flex flex-col space-y-4 pt-2">
-                    <a href="#features" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-red-400 text-sm font-medium">Features</a>
-                    <a href="#stats" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-red-400 text-sm font-medium">Ecosystem</a>
-                    <a href="#node" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-red-400 text-sm font-medium">Nodes</a>
                     <a href="#about" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-red-400 text-sm font-medium">About</a>
-                    <div class="flex flex-col gap-3 pt-4 border-t border-red-900/30">
-                        <button onclick="toggleModal('login-modal'); toggleMobileMenu();" class="w-full py-2.5 rounded-xl border border-red-600/40 text-sm font-semibold text-red-200">Portal Access</button>
-                        <a href="#cta" onclick="toggleMobileMenu()" class="glow-btn text-center py-2.5 rounded-xl text-sm font-bold text-white uppercase">Launch App</a>
+                    <a href="#games" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-red-400 text-sm font-medium">Games</a>
+                    <a href="#contact" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-red-400 text-sm font-medium">Contact</a>
+                    <div class="pt-4 border-t border-red-900/30">
+                        <a href="#contact" onclick="toggleMobileMenu()" class="glow-btn block text-center py-2.5 rounded-xl text-sm font-bold text-white uppercase">Get In Touch</a>
                     </div>
                 </div>
             </div>
         </header>
 
         <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center flex flex-col items-center justify-center min-h-[calc(100vh-5rem)]">
-            
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-red-500/30 mb-8 animate-float">
                 <span class="flex h-2.5 w-2.5 relative">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                 </span>
-                <span class="text-xs font-semibold tracking-wider text-red-300 uppercase">Cryoxa v3.0 Mainnet Online</span>
+                <span class="text-xs font-semibold tracking-wider text-red-300 uppercase">Founded by Alex</span>
             </div>
 
             <div class="mb-6 relative">
                 <div class="absolute -inset-4 bg-red-600/20 rounded-full blur-2xl"></div>
-                <img src="../CryoxaLogo.png" alt="Cryoxa Main Brand Emblem" class="relative w-28 h-28 md:w-36 md:h-36 object-contain mx-auto filter drop-shadow-[0_0_25px_rgba(255,30,67,0.85)] animate-float" onerror="this.src='CryoxaLogo.png'; this.onerror=null;">
+                <img src="../CryoxaLogo.png" alt="Cryoxa Studio Logo" class="relative w-28 h-28 md:w-36 md:h-36 object-contain mx-auto filter drop-shadow-[0_0_25px_rgba(255,30,67,0.85)] animate-float" onerror="this.src='CryoxaLogo.png'; this.onerror=null;">
             </div>
 
             <h1 class="font-orbitron text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6 leading-tight">
-                THE NEXT EVOLUTION OF <br>
-                <span class="red-gradient-text glow-text-red">CRYOXA REALM</span>
+                CRAFTING NEXT-GEN <br>
+                <span class="red-gradient-text glow-text-red">ROBLOX EXPERIENCES</span>
             </h1>
 
             <p class="max-w-2xl text-base sm:text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">
-                Hyper-synchronized decentralized architecture powered by crimson zero-knowledge infrastructure. Experience ultra-low latency and total cryptographic privacy.
+                Cryoxa is an independent Roblox game development studio dedicated to producing high-quality, immersive games with cutting-edge mechanics and visuals.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-md justify-center">
-                <a href="#cta" class="glow-btn px-8 py-4 rounded-xl text-base font-extrabold text-white uppercase tracking-wider flex items-center justify-center gap-3">
-                    <span>Initialize Core</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                <a href="#games" class="glow-btn px-8 py-4 rounded-xl text-base font-extrabold text-white uppercase tracking-wider flex items-center justify-center gap-3">
+                    <span>Explore Games</span>
+                    <i data-lucide="gamepad-2" class="w-5 h-5"></i>
                 </a>
-                <a href="#features" class="px-8 py-4 rounded-xl glass-card border-red-600/30 text-base font-bold text-gray-200 hover:text-white hover:border-red-500 flex items-center justify-center gap-3 transition-all">
-                    <i data-lucide="terminal" class="w-5 h-5 text-red-500"></i>
-                    <span>Read Docs</span>
+                <a href="#contact" class="px-8 py-4 rounded-xl glass-card border-red-600/30 text-base font-bold text-gray-200 hover:text-white hover:border-red-500 flex items-center justify-center gap-3 transition-all">
+                    <i data-lucide="mail" class="w-5 h-5 text-red-500"></i>
+                    <span>Contact Studio</span>
                 </a>
             </div>
+        </section>
 
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
-                <div class="glass-card p-4 rounded-2xl text-center">
-                    <div class="font-orbitron text-2xl md:text-3xl font-bold text-red-400 glow-text-red" id="counter-1">0</div>
-                    <div class="text-xs text-gray-400 mt-1 uppercase font-semibold">Tuning Speed</div>
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-orbitron text-3xl sm:text-5xl font-extrabold text-white mb-4">
+                    ABOUT <span class="text-red-500 glow-text-red">CRYOXA</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400">
+                        <i data-lucide="code-2" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Custom Architecture</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Built from the ground up with optimized Lua scripting, responsive UI frameworks, and seamless backend syncing.
+                    </p>
                 </div>
-                <div class="glass-card p-4 rounded-2xl text-center">
-                    <div class="font-orbitron text-2xl md:text-3xl font-bold text-red-400 glow-text-red" id="counter-2">0</div>
-                    <div class="text-xs text-gray-400 mt-1 uppercase font-semibold">Nodes Active</div>
+
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400">
+                        <i data-lucide="sparkles" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Vibrant Mechanics</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Focused on player engagement through unique game loops, crisp visual effects, and fluid user interactions.
+                    </p>
                 </div>
-                <div class="glass-card p-4 rounded-2xl text-center">
-                    <div class="font-orbitron text-2xl md:text-3xl font-bold text-red-400 glow-text-red" id="counter-3">0</div>
-                    <div class="text-xs text-gray-400 mt-1 uppercase font-semibold">Block Time</div>
-                </div>
-                <div class="glass-card p-4 rounded-2xl text-center">
-                    <div class="font-orbitron text-2xl md:text-3xl font-bold text-red-400 glow-text-red" id="counter-4">0</div>
-                    <div class="text-xs text-gray-400 mt-1 uppercase font-semibold">Uptime Ratio</div>
+
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400">
+                        <i data-lucide="crown" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Studio Vision</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Founded by Alex with the goal of pushing Roblox engine capabilities and delivering high-caliber community experiences.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <section id="games" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-16">
                 <h2 class="font-orbitron text-3xl sm:text-5xl font-extrabold text-white mb-4">
-                    HIGH PERFORMANCE <span class="text-red-500 glow-text-red">CAPABILITIES</span>
+                    OUR <span class="text-red-500 glow-text-red">PROJECTS</span>
                 </h2>
                 <div class="h-1 w-24 bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto rounded-full"></div>
-                <p class="text-gray-400 mt-4 max-w-xl mx-auto">Engineered to push the boundaries of high-frequency computation and cryptographic security.</p>
+                <p class="text-gray-400 mt-4 max-w-xl mx-auto">Discover active titles and upcoming Roblox experiences developed by Cryoxa.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-red-600/10 rounded-full blur-2xl group-hover:bg-red-600/30 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400 group-hover:text-red-300 group-hover:scale-110 transition-all duration-300">
-                        <i data-lucide="shield-alert" class="w-7 h-7"></i>
+                <div class="glass-card rounded-3xl overflow-hidden border border-red-600/30 flex flex-col">
+                    <div class="h-48 bg-gradient-to-br from-red-950 via-black to-red-900 flex items-center justify-center p-6 relative">
+                        <i data-lucide="flame" class="w-16 h-16 text-red-500/40 absolute"></i>
+                        <span class="font-orbitron text-xl font-bold text-white z-10 tracking-wider">PROJECT ALPHA</span>
+                        <span class="absolute top-4 right-4 bg-red-600/30 border border-red-500/50 text-red-300 text-xs px-3 py-1 rounded-full font-semibold">Active Development</span>
                     </div>
-                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Quantum Security</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Lattice-based encryption safeguards all internal state variables against next-generation threat vectors and computational exploits.
-                    </p>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Roblox Title</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An upcoming high-octane Roblox experience featuring dark aesthetic aesthetics and custom action systems.</p>
+                        <button class="w-full py-3 rounded-xl border border-red-600/40 text-red-300 text-sm font-semibold hover:bg-red-950/40 hover:border-red-500 transition-all">Coming Soon</button>
+                    </div>
                 </div>
 
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-red-600/10 rounded-full blur-2xl group-hover:bg-red-600/30 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400 group-hover:text-red-300 group-hover:scale-110 transition-all duration-300">
-                        <i data-lucide="zap" class="w-7 h-7"></i>
+                <div class="glass-card rounded-3xl overflow-hidden border border-red-600/30 flex flex-col">
+                    <div class="h-48 bg-gradient-to-br from-red-900 via-black to-red-950 flex items-center justify-center p-6 relative">
+                        <i data-lucide="swords" class="w-16 h-16 text-red-500/40 absolute"></i>
+                        <span class="font-orbitron text-xl font-bold text-white z-10 tracking-wider">PROJECT BETA</span>
+                        <span class="absolute top-4 right-4 bg-emerald-600/30 border border-emerald-500/50 text-emerald-300 text-xs px-3 py-1 rounded-full font-semibold">In Design</span>
                     </div>
-                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Sub-Zero Latency</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Custom execution engine built in Rust delivering sub-millisecond settlement times with instant global finality.
-                    </p>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Mystery Experience</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">Innovative game mode focusing on competitive mechanics, player rewards, and custom UI framework.</p>
+                        <button class="w-full py-3 rounded-xl border border-red-600/40 text-red-300 text-sm font-semibold hover:bg-red-950/40 hover:border-red-500 transition-all">In Production</button>
+                    </div>
                 </div>
 
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-red-600/10 rounded-full blur-2xl group-hover:bg-red-600/30 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400 group-hover:text-red-300 group-hover:scale-110 transition-all duration-300">
-                        <i data-lucide="cpu" class="w-7 h-7"></i>
+                <div class="glass-card rounded-3xl overflow-hidden border border-red-600/30 flex flex-col">
+                    <div class="h-48 bg-gradient-to-br from-black via-red-950 to-black flex items-center justify-center p-6 relative">
+                        <i data-lucide="shield" class="w-16 h-16 text-red-500/40 absolute"></i>
+                        <span class="font-orbitron text-xl font-bold text-white z-10 tracking-wider">CRYOXA CORE</span>
+                        <span class="absolute top-4 right-4 bg-rose-600/30 border border-rose-500/50 text-rose-300 text-xs px-3 py-1 rounded-full font-semibold">Framework</span>
                     </div>
-                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Neural Mesh</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Adaptive node load-balancing dynamically routes workloads to prevent congestion and ensure 99.999% availability.
-                    </p>
-                </div>
-
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-red-600/10 rounded-full blur-2xl group-hover:bg-red-600/30 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400 group-hover:text-red-300 group-hover:scale-110 transition-all duration-300">
-                        <i data-lucide="layers" class="w-7 h-7"></i>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Studio Modules</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">Internal custom modules and UI engines crafted by Alex to streamline studio project rollouts.</p>
+                        <button class="w-full py-3 rounded-xl border border-red-600/40 text-red-300 text-sm font-semibold hover:bg-red-950/40 hover:border-red-500 transition-all">Internal Core</button>
                     </div>
-                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Modular Sharding</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Infinite scaling capabilities utilizing isolated crimson state channels without sacrificing cross-shard interoperability.
-                    </p>
                 </div>
-
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-red-600/10 rounded-full blur-2xl group-hover:bg-red-600/30 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400 group-hover:text-red-300 group-hover:scale-110 transition-all duration-300">
-                        <i data-lucide="activity" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Real-time Telemetry</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Comprehensive observability tools providing live diagnostics, node health metrics, and automated alert systems.
-                    </p>
-                </div>
-
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-red-600/10 rounded-full blur-2xl group-hover:bg-red-600/30 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-600/40 flex items-center justify-center mb-6 text-red-400 group-hover:text-red-300 group-hover:scale-110 transition-all duration-300">
-                        <i data-lucide="globe" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="font-orbitron text-xl font-bold text-white mb-3">Decentralized Vaults</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Multi-signature obsidian vault contracts designed for resilient asset preservation and automated liquidity management.
-                    </p>
-                </div>
-
             </div>
         </section>
 
-        <section id="node" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 w-full">
-            <div class="glass-card rounded-3xl border border-red-600/30 p-6 md:p-10 relative overflow-hidden">
-                <div class="flex flex-col lg:flex-row gap-8 items-center justify-between">
-                    <div class="w-full lg:w-1/2">
-                        <div class="inline-block text-xs font-bold uppercase tracking-widest text-red-400 mb-2">Live Node Console</div>
-                        <h2 class="font-orbitron text-3xl sm:text-4xl font-extrabold text-white mb-4">
-                            CONNECT TO THE <span class="text-red-500 glow-text-red">CRYOXA GRID</span>
-                        </h2>
-                        <p class="text-gray-400 text-sm md:text-base mb-6 leading-relaxed">
-                            Interact directly with Cryoxa light nodes through our cryptographic RPC protocol. Experience raw power right from your browser console.
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-orbitron text-3xl sm:text-5xl font-extrabold text-white mb-4">
+                    CONTACT <span class="text-red-500 glow-text-red">ME</span>
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-xl mx-auto">Get in touch directly with Alex or connect via socials.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="glass-card p-8 rounded-3xl border border-red-600/40 glow-box-red flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-950/60 border border-indigo-500/40 flex items-center justify-center p-2">
+                                <img src="../discord.png" alt="Discord Icon" class="w-full h-full object-contain" onerror="this.src='discord.png'; this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <i data-lucide="message-square" class="w-7 h-7 text-indigo-400 hidden"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-1">Discord Tag</div>
+                                <div class="font-orbitron text-xl font-extrabold text-white">z_justalex_z</div>
+                            </div>
+                        </div>
+                        <button onclick="copyDiscord()" class="px-4 py-2 bg-indigo-900/40 border border-indigo-500/40 hover:border-indigo-400 rounded-xl text-xs font-bold text-indigo-200 transition-all flex items-center gap-2">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                            <span id="copy-txt">Copy</span>
+                        </button>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl border border-red-600/30">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-red-950/60 border border-red-600/40 flex items-center justify-center text-red-400">
+                                <i data-lucide="user" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-orbitron text-lg font-bold text-white">Studio Founder</h3>
+                                <p class="text-xs text-gray-400">Alex • Head Developer & Lead Designer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Open for Roblox game development inquiries, scripting collaboration, or community feedback regarding Cryoxa projects.
                         </p>
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-3 text-sm text-gray-300">
-                                <i data-lucide="check-circle-2" class="text-red-500 w-5 h-5"></i>
-                                <span>Zero-knowledge validation verified</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-sm text-gray-300">
-                                <i data-lucide="check-circle-2" class="text-red-500 w-5 h-5"></i>
-                                <span>Encrypted peer-to-peer relay enabled</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-sm text-gray-300">
-                                <i data-lucide="check-circle-2" class="text-red-500 w-5 h-5"></i>
-                                <span>Automated fault tolerance protocols active</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-full lg:w-1/2 bg-black/90 rounded-2xl border border-red-900/50 p-4 font-mono text-xs sm:text-sm shadow-2xl relative">
-                        <div class="flex items-center justify-between border-b border-red-950 pb-3 mb-3">
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded-full bg-red-600"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-600"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-600"></div>
-                                <span class="text-gray-500 text-xs ml-2">cryoxa-terminal v3.4</span>
-                            </div>
-                            <button onclick="clearTerminal()" class="text-xs text-red-400 hover:text-red-300">Clear</button>
-                        </div>
-                        <div id="terminal-body" class="h-56 overflow-y-auto space-y-2 text-gray-300 pr-2">
-                            <p class="text-red-500">[SYSTEM]: Cryoxa Core Initialized successfully.</p>
-                            <p class="text-gray-400">[NET]: Syncing state headers from cluster 0x89F...</p>
-                            <p class="text-emerald-400">[STATUS]: Handshake established. Latency: 0.12ms</p>
-                            <p class="text-gray-400">[INFO]: Type 'help' or click ping button below.</p>
-                        </div>
-                        <div class="mt-3 pt-3 border-t border-red-950/60 flex items-center gap-2">
-                            <span class="text-red-500 font-bold">&gt;</span>
-                            <input type="text" id="terminal-input" placeholder="Enter command..." class="bg-transparent border-none outline-none text-white w-full text-xs sm:text-sm" onkeydown="handleTerminalKey(event)">
-                            <button onclick="runPing()" class="px-3 py-1 bg-red-900/40 border border-red-600/40 rounded text-xs text-red-300 hover:bg-red-800/50">PING</button>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="cta" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full text-center relative z-10">
-            <div class="glass-card rounded-3xl p-10 md:p-16 relative overflow-hidden border border-red-600/40 glow-box-red">
-                <div class="absolute inset-0 bg-gradient-to-r from-red-900/20 via-black to-red-950/30"></div>
-                
-                <div class="relative z-10 max-w-3xl mx-auto">
-                    <img src="../CryoxaLogo.png" alt="Cryoxa Footer Emblem" class="w-20 h-20 object-contain mx-auto mb-6 filter drop-shadow-[0_0_15px_rgba(255,30,67,0.9)]" onerror="this.src='CryoxaLogo.png'; this.onerror=null;">
-                    <h2 class="font-orbitron text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
-                        READY TO ENTER THE <br><span class="red-gradient-text glow-text-red">CRYOXA NETWORK?</span>
-                    </h2>
-                    <p class="text-gray-300 mb-8 text-base sm:text-lg">
-                        Join thousands of developers, validators, and digital pioneers shaping the dark crimson cryptographic realm today.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-                        <input type="email" id="email-subscribe" placeholder="Enter your email hash..." class="w-full px-5 py-3.5 rounded-xl bg-black/80 border border-red-800/60 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500">
-                        <button onclick="subscribeUser()" class="w-full sm:w-auto glow-btn px-8 py-3.5 rounded-xl font-bold text-white uppercase tracking-wider whitespace-nowrap">Join Portal</button>
-                    </div>
-                    <div id="sub-msg" class="text-xs text-red-400 mt-3 hidden">Access key dispatched to terminal buffer.</div>
+                <div class="glass-card p-8 rounded-3xl border border-red-600/40 relative">
+                    <h3 class="font-orbitron text-xl font-bold text-white mb-6 flex items-center gap-3">
+                        <i data-lucide="send" class="w-5 h-5 text-red-500"></i>
+                        <span>Send a Message</span>
+                    </h3>
+                    
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Your Name</label>
+                            <input type="text" required placeholder="Roblox Username / Name" class="w-full px-4 py-3 rounded-xl bg-black/80 border border-red-900/60 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Contact Info</label>
+                            <input type="text" required placeholder="Discord or Contact handle" class="w-full px-4 py-3 rounded-xl bg-black/80 border border-red-900/60 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Message</label>
+                            <textarea required rows="4" placeholder="Write your message here..." class="w-full px-4 py-3 rounded-xl bg-black/80 border border-red-900/60 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 text-sm resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full glow-btn py-3.5 rounded-xl font-bold text-white uppercase text-sm tracking-wider flex items-center justify-center gap-2">
+                            <span>Dispatch Message</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                    
+                    <div id="form-msg" class="text-xs text-red-400 mt-3 text-center hidden">Your message has been sent to the Cryoxa team!</div>
                 </div>
             </div>
         </section>
 
         <footer class="mt-auto border-t border-red-900/30 bg-black/90 backdrop-blur-md relative z-10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div class="flex items-center gap-3">
-                    <img src="../CryoxaLogo.png" alt="Cryoxa Logo Footer" class="w-8 h-8 object-contain" onerror="this.src='CryoxaLogo.png'; this.onerror=null;">
+                    <img src="../CryoxaLogo.png" alt="Cryoxa Footer Logo" class="w-8 h-8 object-contain" onerror="this.src='CryoxaLogo.png'; this.onerror=null;">
                     <span class="font-orbitron font-bold text-lg text-white">CRYOXA</span>
-                    <span class="text-xs text-gray-500">© 2026 Cryoxa Ecosystem. All rights reserved.</span>
                 </div>
-
-                <div class="flex items-center gap-6">
-                    <a href="#" class="text-gray-400 hover:text-red-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-red-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-red-400 transition-colors"><i data-lucide="disc" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-red-400 transition-colors"><i data-lucide="message-square" class="w-5 h-5"></i></a>
+                <p class="text-xs text-gray-500 text-center">© Cryoxa Studio. Founded by Alex. All rights reserved.</p>
+                <div class="flex items-center gap-4 text-xs text-gray-400">
+                    <span>Roblox Development Studio</span>
                 </div>
             </div>
         </footer>
 
-    </div>
-
-    <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="glass-card w-full max-w-md p-8 rounded-3xl border border-red-600/50 relative glow-box-red-lg">
-            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            <div class="text-center mb-6">
-                <img src="../CryoxaLogo.png" alt="Cryoxa Logo Modal" class="w-14 h-14 object-contain mx-auto mb-3" onerror="this.src='CryoxaLogo.png'; this.onerror=null;">
-                <h3 class="font-orbitron text-2xl font-bold text-white">ACCESS PORTAL</h3>
-                <p class="text-xs text-gray-400 mt-1">Authenticate Cryoxa Node Credentials</p>
-            </div>
-            <form onsubmit="handleLogin(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Identity Key</label>
-                    <input type="text" required placeholder="0x8F92...3B4" class="w-full px-4 py-3 rounded-xl bg-black/80 border border-red-900/60 text-white focus:outline-none focus:border-red-500 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Passphrase Signature</label>
-                    <input type="password" required placeholder="••••••••••••" class="w-full px-4 py-3 rounded-xl bg-black/80 border border-red-900/60 text-white focus:outline-none focus:border-red-500 text-sm">
-                </div>
-                <button type="submit" class="w-full glow-btn py-3.5 rounded-xl font-bold text-white uppercase text-sm tracking-wider mt-2">Establish Link</button>
-            </form>
-        </div>
     </div>
 
     <script>
@@ -429,93 +390,30 @@
             menu.classList.toggle('hidden');
         }
 
-        function toggleModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.toggle('hidden');
-        }
+        function copyDiscord() {
+            const discordUser = "z_justalex_z";
+            const tempInput = document.createElement("input");
+            tempInput.value = discordUser;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
 
-        function handleLogin(e) {
-            e.preventDefault();
-            alert("Cryptographic handshake complete. Node link authorized.");
-            toggleModal('login-modal');
-        }
-
-        function subscribeUser() {
-            const input = document.getElementById('email-subscribe');
-            const msg = document.getElementById('sub-msg');
-            if (input.value.trim() !== '') {
-                msg.classList.remove('hidden');
-                input.value = '';
-                setTimeout(() => msg.classList.add('hidden'), 4000);
-            }
-        }
-
-        function animateCounter(id, start, end, duration, suffix = '') {
-            const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                obj.innerHTML = value.toLocaleString() + suffix;
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            animateCounter('counter-1', 0, 185000, 2000, ' TPS');
-            animateCounter('counter-2', 0, 4290, 2000, '');
-            animateCounter('counter-3', 0, 12, 1500, ' ms');
-            animateCounter('counter-4', 0, 99, 1800, '.9%');
-        });
-
-        function handleTerminalKey(e) {
-            if (e.key === 'Enter') {
-                const input = document.getElementById('terminal-input');
-                const val = input.value.trim();
-                if (val) {
-                    appendTerminalLine(`> ${val}`, 'text-red-400');
-                    processCommand(val.toLowerCase());
-                    input.value = '';
-                }
-            }
-        }
-
-        function runPing() {
-            appendTerminalLine(`> ping --cluster-main`, 'text-red-400');
-            processCommand('ping');
-        }
-
-        function clearTerminal() {
-            document.getElementById('terminal-body').innerHTML = '';
-        }
-
-        function appendTerminalLine(text, colorClass = 'text-gray-300') {
-            const body = document.getElementById('terminal-body');
-            const p = document.createElement('p');
-            p.className = `${colorClass} text-xs leading-relaxed`;
-            p.innerText = text;
-            body.appendChild(p);
-            body.scrollTop = body.scrollHeight;
-        }
-
-        function processCommand(cmd) {
+            const copyTxt = document.getElementById('copy-txt');
+            copyTxt.innerText = "Copied!";
             setTimeout(() => {
-                if (cmd === 'help') {
-                    appendTerminalLine('[HELP]: Commands available -> status, ping, nodes, clear, info');
-                } else if (cmd === 'ping') {
-                    appendTerminalLine('[PONG]: Crimson cluster node 0x7A returned 200 OK (0.08ms latency)', 'text-emerald-400');
-                } else if (cmd === 'status') {
-                    appendTerminalLine('[SYS]: All 4,290 nodes active. Zero cryptographic anomalies detected.', 'text-red-300');
-                } else if (cmd === 'nodes') {
-                    appendTerminalLine('[NODES]: Tokyo: ONLINE | Frankfurt: ONLINE | N.Virginia: ONLINE | Singapore: ONLINE');
-                } else {
-                    appendTerminalLine(`[ERR]: Unknown instruction '${cmd}'. Type 'help' for manual.`, 'text-rose-500');
-                }
-            }, 250);
+                copyTxt.innerText = "Copy";
+            }, 2000);
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById('form-msg');
+            msg.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 4000);
         }
 
         const canvas = document.getElementById('bg-canvas');
