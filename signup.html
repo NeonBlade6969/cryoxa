@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Account | Cryoxa</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      background: #080808; color: #fff;
+      font-family: Arial, sans-serif; padding: 20px;
+    }
+    .card {
+      width: 100%; max-width: 420px; padding: 30px;
+      background: #121212; border: 1px solid #302020;
+      border-radius: 16px;
+    }
+    h1 { margin-top: 0; }
+    h1 span { color: #ff3030; }
+    p { color: #aaa; line-height: 1.5; }
+    label { display: block; margin: 16px 0 7px; }
+    input {
+      width: 100%; padding: 13px; border-radius: 8px;
+      border: 1px solid #383838; background: #080808;
+      color: white; font-size: 16px;
+    }
+    button {
+      width: 100%; margin-top: 22px; padding: 14px;
+      border: 0; border-radius: 8px; background: #ff3030;
+      color: white; font-weight: bold; cursor: pointer;
+    }
+    button:disabled { opacity: .6; cursor: wait; }
+    #message { overflow-wrap: anywhere; }
+    a { color: #ff5555; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Join <span>CRYOXA</span></h1>
+    <p>Create your account and choose your unique username.</p>
+
+```
+<form id="signup-form">
+  <label for="username">Username</label>
+  <input id="username" required minlength="3" maxlength="20"
+    pattern="[A-Za-z0-9_]+" autocomplete="username"
+    placeholder="YourUsername">
+
+  <label for="email">Email</label>
+  <input id="email" type="email" required autocomplete="email"
+    placeholder="you@example.com">
+
+  <label for="password">Password</label>
+  <input id="password" type="password" required minlength="8"
+    autocomplete="new-password" placeholder="At least 8 characters">
+
+  <button id="submit" type="submit">Create Account</button>
+</form>
+
+<p id="message" role="status"></p>
+<p>Already registered? <a href="/login.html">Log in</a></p>
+<p><a href="/">← Back to Cryoxa</a></p>
+```
+
+  </main>
+
+  <script>
+    // Replace these two placeholders with your Supabase project details.
+    const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+    const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+    const client = window.supabase.createClient(
+      SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const form = document.getElementById("signup-form");
+    const message = document.getElementById("message");
+    const submit = document.getElementById("submit");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      message.textContent = "";
+      submit.disabled = true;
+
+      const username = document.getElementById("username").value.trim().toLowerCase();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        if (!/^[a-z0-9_]{3,20}$/.test(username)) {
+          throw new Error("Use 3–20 letters, numbers, or underscores for your username.");
+        }
+
+        const check = await fetch(
+          "/api/check-username?username=" + encodeURIComponent(username)
+        );
+        const availability = await check.json();
+
+        if (!check.ok) {
+          throw new Error(availability.error || "Username check failed.");
+        }
+        if (!availability.available) {
+          throw new Error("That username is taken or unavailable. Try another.");
+        }
+
+        const { data, error } = await client.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { username },
+            emailRedirectTo: window.location.origin + "/"
+          }
+        });
+
+        if (error) throw error;
+
+        message.textContent = data.user && !data.session
+          ? "Account created! Check your email to confirm your account."
+          : "Account created! You can now log in.";
+
+        form.reset();
+      } catch (error) {
+        message.textContent = error.message || "Signup failed. Please try again.";
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
